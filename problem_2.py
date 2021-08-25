@@ -7,6 +7,10 @@ def rotated_array_search(input_list, number):
     Returns:
        int: Index or -1
     """
+    if input_list is None:
+        return -1
+    if len(input_list) == 0:
+        return -1
     if len(input_list) == 1:
         binary_search(input_list, number)
 
@@ -61,26 +65,29 @@ def binary_search(input_list, number):
 
 
 def linear_search(input_list, number):
+    if input_list is None:
+        return -1
     for index, element in enumerate(input_list):
         if element == number:
             return index
     return -1
 
+
 def test_function(test_case):
     input_list = test_case[0]
     number = test_case[1]
     print("Linear: {} || rotated: {}".format(linear_search(input_list, number), rotated_array_search(input_list, number)))
-    # if linear_search(input_list, number) == rotated_array_search(input_list, number):
-    #     print("Pass")
-    # else:
-    #     print("Fail")
 
 
+# Test 1: Normal test
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 10])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
 
-# test binary search
-# print(binary_search([1,2,3,4,5,6],3))
+# Test 2: empty array
+test_function([[], 10])
+
+# Test 3:
+test_function([None, 10])

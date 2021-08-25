@@ -7,6 +7,9 @@ def sqrt(number):
     Returns:
        int: Floored Square Root
     """
+    if not isinstance(number,int):
+        print("Error, please enter in a number")
+        return
     if number < 0:
         print("Error, the input can't be negative")
         return
@@ -27,9 +30,18 @@ def sqrt(number):
             return lower_bound
 
 
-
+# Test 1: Normal test
+print("----------------Test 1------------------")
 print ("Pass" if  (3 == sqrt(9)) else "Fail")
 print ("Pass" if  (0 == sqrt(0)) else "Fail")
 print ("Pass" if  (4 == sqrt(16)) else "Fail")
 print ("Pass" if  (1 == sqrt(1)) else "Fail")
 print ("Pass" if  (5 == sqrt(27)) else "Fail")
+
+# Test 2: Negative test
+print("----------------Test 2------------------")
+print(sqrt(-9))
+
+# Test 3: Input a string
+print("----------------Test 3------------------")
+print(sqrt("a"))

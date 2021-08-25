@@ -45,9 +45,11 @@ class RouteTrieNode:
 
 # The Router class will wrap the Trie and handle
 class Router:
-    def __init__(self, name):
+    def __init__(self, name="root handler"):
         # Create a new RouteTrie for holding our routes
         # You could also add a handler for 404 page not found responses as well!
+        if name == None:
+            name = "root handler"
         self.router_trie = RouteTrie()
         self.router_trie.root.is_handler = name
 
@@ -80,13 +82,41 @@ class Router:
 
 # Here are some test cases and expected outputs you can use to test your implementation
 
-# create the router and add a route
-router = Router("root handler") # remove the 'not found handler' if you did not implement this
-router.add_handler("/home/about", "about handler")  # add a route
+def test1():
+    print("-------------Test 1-----------------")
+    # create the router and add a route
+    router = Router("root handler")
+    router.add_handler("/home/about", "about handler")  # add a route
 
-# some lookups with the expected output
-print(router.lookup("/")) # should print 'root handler'
-print(router.lookup("/home")) # should print 'not found handler' or None if you did not implement one
-print(router.lookup("/home/about")) # should print 'about handler'
-print(router.lookup("/home/about/")) # should print 'about handler' or None if you did not handle trailing slashes
-print(router.lookup("/home/about/me")) # should print 'not found handler' or None if you did not implement one
+    # some lookups with the expected output
+    print(router.lookup("/")) # should print 'root handler'
+    print(router.lookup("/home")) # should print 'not found handler' or None if you did not implement one
+    print(router.lookup("/home/about")) # should print 'about handler'
+    print(router.lookup("/home/about/")) # should print 'about handler' or None if you did not handle trailing slashes
+    print(router.lookup("/home/about/me")) # should print 'not found handler' or None if you did not implement one
+
+
+def test2():
+    print("-------------Test 2-----------------")
+    # create the router and add a route
+    router = Router("root handler")
+    router.add_handler("////////", "slash handler")  # only has slash in the input
+    # It will only affect the handler name of root handler
+    print(router.lookup("/")) # slash handler
+    print(router.lookup("//")) # slash handler
+    print(router.lookup("///")) # slash handler
+
+
+def test3():
+    print("----------Test 3---------------")
+    # create the router and add a route
+    # input a None value, the handler will be set to "root handler"
+    router = Router(None)  # remove the 'not found handler' if you did not implement this
+    # without add a hander, this will print a root handler
+    print(router.lookup("/")) # root handler
+    print(router.lookup("/home")) # Not found handler
+
+
+test1()
+test2()
+test3()

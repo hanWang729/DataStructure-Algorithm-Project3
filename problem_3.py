@@ -45,6 +45,10 @@ def rearrange_digits(input_list):
             result1 += str(input_list[i])
         else:
             result2 += str(input_list[i])
+    if result1 == "":
+        result1 = 0
+    if result2 == "":
+        result2 = 0
     return [int(result1), int(result2)]
 
 
@@ -57,6 +61,14 @@ def test_function(test_case):
         print("Fail")
 
 
+# Test 1: normal test
 test_function([[1, 2, 3, 4, 5], [542, 31]])
-test_case = [[4, 6, 2, 5, 9, 8], [964, 852]]
-test_function(test_case)
+test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
+
+# Test 2: only one number in array
+print(rearrange_digits([1])) # [1, 0]
+
+#Test 3: empty array
+print(rearrange_digits([])) # [0, 0]
+
+
