@@ -22,7 +22,9 @@ If the sub-array is sorted, just use a normal binary search to the problem, if n
 
 **Time Complexity:** O(logn)
 
-**Space Complexity:** O(n)
+**Space Complexity:** O(logn)
+
+*Since you are using a modified **Recursive Binary Search** in your solution code for the search functionality in the rotated array, the space complexity should be logarithmic (i.e. O(log(N)) ) here.*
 
 
 
@@ -43,17 +45,39 @@ This problem is similar to the idea of quick sort. Just use two pivot. if the nu
 
 **Time Complexity:** O(n)
 
-**Space Complexity:** O(n)
+**Space Complexity:** O(1)
+
+*Since you are not using any extra/auxiliary space, here, it should be constant,i.e. O(1) space complexity, not O(n)*
+
+*Do note that the space complexity can be O(n), only when you use some extra memory with n (variable, not fixed number) elements in it, like an array of n elements or a stack, etc (or sometimes also because of recursion due to implicit stack space), but here since you are only using a few variables (which are constant like every time you run the program it will have only fixed say 4 or 5 variables in it, it won't change from 4 to 6 or 7 depending upon the input provided, hence it is CONSTANT i.e. O(1) space.*
 
 
 
 ## Problem 5: Autocomplete with Tries
 
-Just recurse down the trie, and connect the chars. If the node is the node of word, append a new item in the result list.
+The idea of **suffixes()**: recurse down the trie, and connect the chars. If the node is the node of word, append a new item in the result list.
 
-**Time Complexity (suffixes function)**: O(m*n). m is the average length of a word, n is the number of words existing
+**insert()**: add new node if the char does not exist, and go down following the order of the word.
 
-**Space Complexity (suffixes function)**: Since the tries has been built already, no more memory used. O(1)
+**find()**: following the order of the word and go down. If the char doesn't exist, return None. else, return the current node.
+
+#### insert()
+
+**Time Complexity**: O(n), n is the length of a word
+
+**Space Complexity**: O(n), n is the length of a word
+
+#### find()
+
+**Time Complexity**: O(n), n is the length of a word
+
+**Space Complexity**: Since the tries has been built already, no more memory used. O(1)
+
+#### suffixes()
+
+**Time Complexity**: O(m*n). m is the average length of a word, n is the number of words existing
+
+**Space Complexity**: Since the tries has been built already, no more memory used. O(1)
 
 
 
@@ -63,7 +87,9 @@ Set the first element in the array is the max and min value. Go through the arra
 
 **Time Complexity**: O(n)
 
-**Space Complexity**: O(n)
+**Space Complexity**: O(1)
+
+*Since you are not using any extra/auxiliary space, here, it should be constant,i.e. O(1) space complexity, not O(n)*
 
 
 
@@ -71,7 +97,15 @@ Set the first element in the array is the max and min value. Go through the arra
 
 When what to add a path or look up, first split path into a word list.
 
-Other part is similar to problem 5.
+The class **RouteTrie** and **RouterTrieNode** are similar to the function in problem 5. The difference is that in the class **RouteTrieNode**, the variable is not is_word, but is is_handler. It will be used for saving the handler information. If the node is the end of a handler, it will be the handler name, otherwise it is "Not found handler".
+
+The class **Router** is the main object in the problem. The variables in it include a object of RouteTrie. There are three main functions:
+
+**split_path()**: used for split the path into several words and save in a word_list
+
+**add_handler()**, add new node in the trie if the word doesn't exist. it use the insert function, similar to problem 5
+
+**lookup():** call the function find() in the Trie, similar to problem 5.
 
 #### add_handler()
 
